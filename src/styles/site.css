@@ -697,24 +697,73 @@ p {
 }
 
 .brand-visual {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 12.5rem;
   padding: 0.85rem;
+  overflow: hidden;
+  isolation: isolate;
   border: 1px solid rgba(31, 33, 66, 0.08);
   border-radius: 22px;
-  background: #ffffff;
+  background:
+    radial-gradient(circle at 50% 28%, rgba(255, 255, 255, 0.98), rgba(246, 250, 255, 0.96) 54%, #ffffff 100%);
   box-shadow:
     0 10px 24px rgba(31, 33, 66, 0.06);
 }
 
+.brand-visual::before,
+.brand-visual::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.brand-visual::before {
+  inset: 18% 16% 20%;
+  z-index: 0;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle, rgba(119, 180, 255, 0.4) 0%, rgba(119, 180, 255, 0.2) 42%, rgba(119, 180, 255, 0.05) 64%, transparent 78%);
+  filter: blur(16px);
+  animation: brand-light-blink 3.2s ease-in-out infinite;
+}
+
+.brand-visual::after {
+  left: 19%;
+  right: 19%;
+  bottom: 12%;
+  height: 18%;
+  z-index: 0;
+  border-radius: 999px;
+  background: radial-gradient(ellipse at center, rgba(103, 163, 255, 0.22), transparent 70%);
+  filter: blur(14px);
+  animation: brand-light-blink 3.2s ease-in-out infinite reverse;
+}
+
 .brand-visual img {
+  position: relative;
+  z-index: 1;
   width: 100%;
   aspect-ratio: 1;
   object-fit: contain;
   border-radius: 18px;
   background: #ffffff;
+  filter: drop-shadow(0 12px 18px rgba(82, 129, 208, 0.14));
+}
+
+@keyframes brand-light-blink {
+  0%,
+  100% {
+    opacity: 0.58;
+    transform: scale(0.98);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.03);
+  }
 }
 
 .brand-tile-copy {
