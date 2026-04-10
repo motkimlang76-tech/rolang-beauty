@@ -1,6 +1,5 @@
 import { renderNavigation, renderPrinciples, renderProjects, renderSocialLinks, renderStats, renderToolbox } from "./components/templates.js";
 import { siteData } from "./data/site-data.js";
-import { initRevealAnimations } from "./utils/reveal.js";
 
 const app = document.querySelector("#app");
 
@@ -20,7 +19,7 @@ const brandInitials =
     .join("") || "YN";
 
 app.innerHTML = `
-  <header class="site-header container reveal">
+  <header class="site-header container">
     <a class="brand" href="#top" aria-label="Go to homepage">
       <span class="brand-mark">
         ${
@@ -41,14 +40,11 @@ app.innerHTML = `
 
   <main id="top">
     <section class="hero container section-gap">
-      <div class="hero-copy reveal">
+      <div class="hero-copy">
         <p class="status-pill">${siteData.profile.availability}</p>
         <p class="eyebrow">${siteData.profile.location}</p>
         <h1>${siteData.profile.intro}</h1>
         <p class="lede">${siteData.profile.summary}</p>
-        <div class="hero-charm-row">
-          ${siteData.profile.charms.map((item) => `<span class="charm-chip">${item}</span>`).join("")}
-        </div>
         <div class="hero-actions">
           <a class="button button-primary" href="${siteData.profile.primaryLink.href}">
             ${siteData.profile.primaryLink.label}
@@ -58,7 +54,7 @@ app.innerHTML = `
           </a>
         </div>
       </div>
-      <aside class="hero-panel reveal" aria-label="Featured Korean beauty set">
+      <aside class="hero-panel" aria-label="Featured Korean beauty set">
         <div class="spotlight-card">
           <div class="spotlight-header">
             <p class="eyebrow">${siteData.featured.eyebrow}</p>
@@ -78,7 +74,7 @@ app.innerHTML = `
     </section>
 
     <section class="container section-gap" id="about">
-      <div class="section-heading reveal">
+      <div class="section-heading">
         <p class="eyebrow">${siteData.sections.about.eyebrow}</p>
         <h2>${siteData.sections.about.title}</h2>
       </div>
@@ -88,12 +84,12 @@ app.innerHTML = `
     </section>
 
     <section class="container section-gap" id="brands">
-      <div class="section-heading reveal">
+      <div class="section-heading">
         <p class="eyebrow">${siteData.sections.brands.eyebrow}</p>
         <h2>${siteData.sections.brands.title}</h2>
         <p>${siteData.sections.brands.description}</p>
       </div>
-      <div class="brand-board reveal">
+      <div class="brand-board">
         <div class="brand-grid">
           ${siteData.brands
             .map(
@@ -117,7 +113,7 @@ app.innerHTML = `
     </section>
 
     <section class="container section-gap" id="shop">
-      <div class="section-heading reveal">
+      <div class="section-heading">
         <p class="eyebrow">${siteData.sections.shop.eyebrow}</p>
         <h2>${siteData.sections.shop.title}</h2>
       </div>
@@ -127,7 +123,7 @@ app.innerHTML = `
     </section>
 
     <section class="container section-gap" id="cart">
-      <div class="cart-card reveal">
+      <div class="cart-card">
         <div class="cart-shell">
           <div class="cart-copy">
             <p class="eyebrow">${siteData.sections.cart.eyebrow}</p>
@@ -160,7 +156,7 @@ app.innerHTML = `
     </section>
 
     <section class="container section-gap" id="routine">
-      <div class="section-heading reveal">
+      <div class="section-heading">
         <p class="eyebrow">${siteData.sections.routine.eyebrow}</p>
         <h2>${siteData.sections.routine.title}</h2>
       </div>
@@ -170,7 +166,7 @@ app.innerHTML = `
     </section>
 
     <section class="container section-gap" id="contact">
-      <div class="contact-card reveal">
+      <div class="contact-card">
         <div class="contact-copy">
           <p class="eyebrow">Contact</p>
           <h2>${siteData.contact.title}</h2>
@@ -192,7 +188,7 @@ app.innerHTML = `
     </section>
   </main>
 
-  <footer class="site-footer container reveal">
+  <footer class="site-footer container">
     <p>
       <span>${siteData.profile.name}</span>
       <span>•</span>
@@ -418,4 +414,3 @@ if (clearCartButton) {
 }
 
 renderCart();
-initRevealAnimations();

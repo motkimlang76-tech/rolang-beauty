@@ -14,7 +14,7 @@ export function renderStats(items) {
   return items
     .map(
       (item) => `
-        <article class="stat-card reveal">
+        <article class="stat-card">
           <strong>${item.value}</strong>
           <span>${item.label}</span>
         </article>
@@ -27,7 +27,7 @@ export function renderPrinciples(items) {
   return items
     .map(
       (item) => `
-        <article class="principle-card reveal">
+        <article class="principle-card">
           <p class="eyebrow">${item.eyebrow ?? "Benefit"}</p>
           <h3>${item.title}</h3>
           <p>${item.description}</p>
@@ -41,7 +41,7 @@ export function renderProjects(items) {
   return items
     .map(
       (item) => `
-        <article class="project-card reveal">
+        <article class="project-card">
           <div class="project-header">
             <p class="eyebrow">${item.category}</p>
             <h3>${item.title}</h3>
@@ -73,7 +73,7 @@ export function renderToolbox(items) {
   return items
     .map(
       (group) => `
-        <article class="toolbox-card reveal">
+        <article class="toolbox-card">
           <p class="eyebrow">${group.title}</p>
           ${group.description ? `<p>${group.description}</p>` : ""}
           <div class="tag-row">

@@ -10,12 +10,10 @@ export const siteData = {
     location: "Phnom Penh City, Cambodia",
     brandImage: "src/assets/rolang-brand-photo-badge.jpeg",
     brandImageAlt: "ROLANG BEAUTY brand photo",
-    availability: "Cute K-beauty orders open now • More Korean products coming soon",
-    intro:
-      "Cute Korean beauty picks in a pink-and-blue shop made for glow.",
+    availability: "Online orders open now • More Korean products coming soon",
+    intro: "Curated Korean skincare, ready to shop online.",
     summary:
-      "ROLANG BEAUTY is an online Korean beauty shop based in Phnom Penh City, Cambodia. The store highlights SKIN1004, COSRX, Isntree, ANUA, Medicube, and APLB with soft-glow skincare picks now and more Korean beauty products coming later.",
-    charms: ["Soft glow picks", "Cute packaging mood", "K-beauty favorites"],
+      "ROLANG BEAUTY is an online Korean beauty shop based in Phnom Penh City, Cambodia. The store focuses on SKIN1004, COSRX, Isntree, ANUA, Medicube, and APLB, with more Korean skincare and beauty products to be added over time.",
     email: "motkimlang76@gmail.com",
     primaryLink: {
       label: "Shop Korean picks",
@@ -37,17 +35,17 @@ export const siteData = {
   sections: {
     about: {
       eyebrow: "About",
-      title: "A cute pink-and-blue Korean beauty shop with a growing K-beauty collection.",
+      title: "A Korean beauty shop with a growing K-beauty collection.",
     },
     brands: {
       eyebrow: "Brands",
-      title: "Cute Korean skincare brands you want to sell at ROLANG BEAUTY.",
+      title: "Korean skincare brands featured at ROLANG BEAUTY.",
       description:
         "These are the key Korean skincare brands featured on the shop right now, with space to add even more later.",
     },
     shop: {
       eyebrow: "Shop",
-      title: "Cute Korean beauty picks you can add to your cart and checkout by email.",
+      title: "Featured Korean beauty picks you can add to your cart and order by email.",
     },
     cart: {
       eyebrow: "Cart",
@@ -57,21 +55,25 @@ export const siteData = {
     },
     routine: {
       eyebrow: "Coming soon",
-      title: "More Korean products will be added here as the shop grows.",
+      title: "More Korean skincare and beauty products will be added as the shop grows.",
     },
   },
   featured: {
     eyebrow: "Featured set",
-    title: "K-Glow Starter Set",
+    title: "Starter Korean Skincare Set",
     description:
-      "A beginner-friendly Korean beauty set with cleansing, hydration, and daily glow in one easy bundle.",
+      "A beginner-friendly Korean beauty set with cleansing, hydration, and daily care in one easy bundle.",
     price: "RM159 set",
-    note: "Perfect for starting your first K-beauty routine with soft, glow-focused essentials.",
-    items: ["Glass Glow Cleanser", "Seoul Dew Serum", "Blue Calm Sunscreen"],
+    note: "A simple starter routine for customers beginning with Korean skincare.",
+    items: [
+      "SKIN1004 Madagascar Centella Ampoule",
+      "COSRX Advanced Snail 96 Mucin Power Essence",
+      "Isntree Onion Newpair Purple Tone-Up Sun Cream",
+    ],
   },
   stats: [
     { value: "K-beauty focus", label: "curated Korean skincare and beauty products" },
-    { value: "Pink + blue", label: "a bright, glossy store look instead of a plain catalog" },
+    { value: "Online orders", label: "a simple shopping flow with cart and email checkout" },
     { value: "6 brands", label: "SKIN1004, COSRX, Isntree, ANUA, Medicube, and APLB" },
   ],
   principles: [
@@ -83,9 +85,9 @@ export const siteData = {
     },
     {
       eyebrow: "Why it works",
-      title: "Cute but clean shopping",
+      title: "Clear shopping experience",
       description:
-        "The pink-and-blue look gives the shop personality while still keeping the page simple to browse.",
+        "The layout keeps the catalog easy to browse while still matching the brand colors.",
     },
     {
       eyebrow: "Why it works",
@@ -140,54 +142,54 @@ export const siteData = {
   ],
   projects: [
     {
-      id: "glass-glow-cleanser",
-      title: "Glass Glow Cleanser",
-      category: "K-beauty cleanser",
+      id: "skin1004-centella-ampoule",
+      title: "SKIN1004 Madagascar Centella Ampoule",
+      category: "Featured ampoule",
       meta: "RM59",
       price: 59,
       description:
-        "A gentle Korean cleanser made for soft foam, everyday comfort, and that fresh clean-skin feeling.",
+        "A calming ampoule centered on centella asiatica for lightweight daily soothing care.",
       outcomes: [
-        "Daily low-foam wash",
-        "Soft after-rinse finish",
-        "Good first-step cleanser",
+        "Light daily hydration",
+        "Calming skin support",
+        "Easy layering step",
       ],
-      stack: ["Rice water", "Panthenol", "Ceramide care"],
-      href: "mailto:motkimlang76@gmail.com?subject=Order%20Glass%20Glow%20Cleanser",
+      stack: ["Centella", "Lightweight texture", "Daily care"],
+      href: "mailto:motkimlang76@gmail.com?subject=Order%20SKIN1004%20Madagascar%20Centella%20Ampoule",
       ctaLabel: "Order by email",
     },
     {
-      id: "seoul-dew-serum",
-      title: "Seoul Dew Serum",
-      category: "K-beauty serum",
+      id: "cosrx-snail-96-essence",
+      title: "COSRX Advanced Snail 96 Mucin Power Essence",
+      category: "Featured essence",
       meta: "RM82",
       price: 82,
       description:
-        "A glow-focused Korean serum that brings hydration, bounce, and a glass-skin style finish.",
+        "A well-known COSRX essence made for hydration, skin comfort, and daily barrier support.",
       outcomes: [
-        "Fresh dewy finish",
-        "Light under makeup",
+        "Barrier-friendly hydration",
+        "Soft skin finish",
         "Easy layering step",
       ],
-      stack: ["Niacinamide", "Hyaluronic acid", "Centella"],
-      href: "mailto:motkimlang76@gmail.com?subject=Order%20Seoul%20Dew%20Serum",
+      stack: ["Snail mucin", "Hydration care", "Daily routine"],
+      href: "mailto:motkimlang76@gmail.com?subject=Order%20COSRX%20Advanced%20Snail%2096%20Mucin%20Power%20Essence",
       ctaLabel: "Order by email",
     },
     {
-      id: "blue-calm-sunscreen",
-      title: "Blue Calm Sunscreen",
-      category: "K-beauty SPF",
+      id: "isntree-onion-tone-up-sun-cream",
+      title: "Isntree Onion Newpair Purple Tone-Up Sun Cream",
+      category: "Featured sunscreen",
       meta: "RM74",
       price: 74,
       description:
-        "A lightweight Korean sunscreen with a smooth finish that sits well in a daily glow routine.",
+        "A lightweight tone-up sunscreen with a smooth finish suited for everyday wear.",
       outcomes: [
         "Daily UV protection",
+        "Tone-up base effect",
         "Comfortable finish",
-        "Works with glow routines",
       ],
-      stack: ["SPF care", "Light texture", "Daily wear"],
-      href: "mailto:motkimlang76@gmail.com?subject=Order%20Blue%20Calm%20Sunscreen",
+      stack: ["SPF care", "Tone-up finish", "Daily wear"],
+      href: "mailto:motkimlang76@gmail.com?subject=Order%20Isntree%20Onion%20Newpair%20Purple%20Tone-Up%20Sun%20Cream",
       ctaLabel: "Order by email",
     },
   ],
@@ -205,11 +207,11 @@ export const siteData = {
     {
       title: "Store mood",
       description: "The visual direction for the brand and future product drops.",
-      items: ["Pink glow", "Blue calm", "K-beauty style", "Cute packaging"],
+      items: ["Pink and blue palette", "Studio product cards", "K-beauty focus", "Clean presentation"],
     },
   ],
   contact: {
-    title: "Need help before you order?",
+    title: "Need help with an order?",
     description:
       "Email for online orders, stock questions, or requests for future Korean products. The cart builds the order first, then checkout opens the email.",
     statusTitle: "Orders handled by email",
