@@ -23,6 +23,20 @@ export function renderStats(items) {
     .join("");
 }
 
+export function renderSteps(items) {
+  return items
+    .map(
+      (item, index) => `
+        <article class="journey-card">
+          <span class="journey-index">${String(index + 1).padStart(2, "0")}</span>
+          <h3>${item.title}</h3>
+          <p>${item.description}</p>
+        </article>
+      `
+    )
+    .join("");
+}
+
 export function renderPrinciples(items) {
   return items
     .map(
@@ -37,35 +51,51 @@ export function renderPrinciples(items) {
     .join("");
 }
 
-export function renderProjects(items) {
+export function renderCollections(items) {
   return items
     .map(
       (item) => `
-        <article class="project-card">
-          <div class="project-header">
-            <p class="eyebrow">${item.category}</p>
-            <h3>${item.title}</h3>
-            <p>${item.description}</p>
-          </div>
-          <ul class="project-outcomes">
-            ${item.outcomes.map((outcome) => `<li>${outcome}</li>`).join("")}
-          </ul>
+        <article class="collection-card">
+          <p class="eyebrow">${item.eyebrow ?? "Edit"}</p>
+          <h3>${item.title}</h3>
+          <p>${item.description}</p>
           <div class="tag-row">
-            ${item.stack.map((tag) => `<span class="tag">${tag}</span>`).join("")}
-          </div>
-          <div class="product-footer">
-            <strong class="product-price">${item.meta ?? ""}</strong>
-            <button
-              class="button button-primary add-to-cart-button"
-              type="button"
-              data-product-id="${item.id}"
-            >
-              Add to cart
-            </button>
+            ${item.tags.map((tag) => `<span class="tag tag-soft">${tag}</span>`).join("")}
           </div>
         </article>
       `
     )
+    .join("");
+}
+
+export function renderProjects(items) {
+  return items
+    .map((item) => {
+      const brandName = item.brand ?? "K-Beauty";
+      const shortName =
+        item.productName ??
+        (item.title.startsWith(`${brandName} `) ? item.title.slice(brandName.length + 1) : item.title);
+      const ingredient = item.details?.find((detail) => /ingredient/i.test(detail.label))?.value ?? "";
+      const help = item.details?.find((detail) => /help/i.test(detail.label))?.value ?? "";
+      const skinType = item.details?.find((detail) => /skin type/i.test(detail.label))?.value ?? "";
+      const skinTypes = (item.skinTypes ?? ["all"]).join(" ");
+
+      return `
+        <article class="product-card" data-skin-types="${skinTypes}" data-product-id="${item.id}">
+          <div class="product-image-bg">
+            <img src="${item.image}" alt="${item.imageAlt ?? item.title}" loading="lazy" />
+          </div>
+          <span class="tag">${item.cardTag ?? item.imageBadge ?? item.category}</span>
+          <h3 class="product-name">${brandName}</h3>
+          <div class="product-desc">${shortName}</div>
+          <p class="product-details">
+            <strong>Ingredient:</strong> ${ingredient}<br />
+            <strong>Help:</strong> ${help}
+          </p>
+          <span class="skin-type">Best for: ${skinType}</span>
+        </article>
+      `;
+    })
     .join("");
 }
 
