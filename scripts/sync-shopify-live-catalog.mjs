@@ -257,15 +257,22 @@ function assertNoUserErrors(action, userErrors) {
 }
 
 function buildCollectionHandles(product) {
-  const haystack = [
+  const keywordHaystack = [
     product.title,
     product.category,
-    product.description,
-    ...(product.details ?? []).map((detail) => `${detail.label} ${detail.value}`),
     ...(product.stack ?? []),
   ]
     .join(' ')
     .toLowerCase();
+
+  const detailHaystack = [
+    product.description,
+    ...(product.details ?? []).map((detail) => `${detail.label} ${detail.value}`),
+  ]
+    .join(' ')
+    .toLowerCase();
+
+  const haystack = `${keywordHaystack} ${detailHaystack}`.trim();
 
   const handles = new Set();
 
@@ -273,23 +280,23 @@ function buildCollectionHandles(product) {
     handles.add('launch-edit');
   }
 
-  if (/(cleanser|cleansing oil)/.test(haystack)) {
+  if (/(cleanser|cleansing oil)/.test(keywordHaystack)) {
     handles.add('cleansers');
   }
 
-  if (/(sun serum|sun gel|sun cream|sunscreen|spf|uv)/.test(haystack)) {
+  if (/(sun serum|sun gel|sun cream|sunscreen|spf|uv)/.test(keywordHaystack)) {
     handles.add('daily-sunscreen');
   }
 
-  if (/(toner|pad)/.test(haystack)) {
+  if (/(toner|pad)/.test(keywordHaystack)) {
     handles.add('toners-and-pads');
   }
 
-  if (/(ampoule|serum|essence|liquid)/.test(haystack)) {
+  if (/(ampoule|serum|essence|liquid)/.test(keywordHaystack)) {
     handles.add('serums-and-ampoules');
   }
 
-  if (/(cream|lotion|mask)/.test(haystack)) {
+  if (/(cream|lotion|mask)/.test(keywordHaystack)) {
     handles.add('creams-and-masks');
   }
 
@@ -625,6 +632,9 @@ async function upsertCollection(handle, config, productIds) {
 
     const currentProductIds = new Set(existing.products.nodes.map((product) => product.id));
     const missingProductIds = productIds.filter((id) => !currentProductIds.has(id));
+    const removableProductIds = existing.products.nodes
+      .map((product) => product.id)
+      .filter((id) => !productIds.includes(id));
 
     if (missingProductIds.length > 0) {
       const addData = await adminFetch(
@@ -645,6 +655,27 @@ async function upsertCollection(handle, config, productIds) {
       );
 
       assertNoUserErrors('collectionAddProducts', addData.collectionAddProducts.userErrors);
+    }
+
+    if (removableProductIds.length > 0) {
+      const removeData = await adminFetch(
+        `
+          mutation RemoveProductsFromCollection($id: ID!, $productIds: [ID!]!) {
+            collectionRemoveProducts(id: $id, productIds: $productIds) {
+              userErrors {
+                field
+                message
+              }
+            }
+          }
+        `,
+        {
+          id: existing.id,
+          productIds: removableProductIds,
+        },
+      );
+
+      assertNoUserErrors('collectionRemoveProducts', removeData.collectionRemoveProducts.userErrors);
     }
 
     await publishToOnlineStore(existing.id);
