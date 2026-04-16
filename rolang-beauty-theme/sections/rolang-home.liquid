@@ -12,6 +12,7 @@
   assign support_hours = settings.support_hours
   assign shipping_policy = shop.shipping_policy
   assign refund_policy = shop.refund_policy
+  assign showcase_fallback_url = section.settings.collection_cta_url | default: section.settings.primary_url | default: routes.all_products_collection_url
   assign hero_highlights_markup = section.settings.hero_highlights | replace: '\n', '<br />' | newline_to_br
   assign hero_highlights = hero_highlights_markup | split: '<br />'
   assign trust_items_markup = section.settings.trust_items | replace: '\n', '<br />' | newline_to_br
@@ -72,7 +73,7 @@
         <div class="rolang-showcase-grid">
           {% if hero_products != blank %}
             {% for product in hero_products limit: 3 %}
-              <article class="rolang-showcase-card">
+              <a class="rolang-showcase-card rolang-showcase-card-link" href="{{ product.url }}" aria-label="View {{ product.title }}">
                 <div class="rolang-showcase-media">
                   {% if product.featured_image %}
                     {% render 'image', image: product.featured_image, width: 320, height: 320, crop: 'center' %}
@@ -82,10 +83,24 @@
                   <strong>{{ product.vendor | default: shop.name }}</strong>
                   <span>{{ product.title }}</span>
                 </div>
-              </article>
+              </a>
+            {% endfor %}
+          {% elsif featured_collection != blank and featured_collection.products_count > 0 %}
+            {% for product in featured_collection.products limit: 3 %}
+              <a class="rolang-showcase-card rolang-showcase-card-link" href="{{ product.url }}" aria-label="View {{ product.title }}">
+                <div class="rolang-showcase-media">
+                  {% if product.featured_image %}
+                    {% render 'image', image: product.featured_image, width: 320, height: 320, crop: 'center' %}
+                  {% endif %}
+                </div>
+                <div class="rolang-showcase-copy">
+                  <strong>{{ product.vendor | default: shop.name }}</strong>
+                  <span>{{ product.title }}</span>
+                </div>
+              </a>
             {% endfor %}
           {% else %}
-            <article class="rolang-showcase-card">
+            <a class="rolang-showcase-card rolang-showcase-card-link" href="{{ showcase_fallback_url }}" aria-label="Browse the launch collection">
               <div class="rolang-showcase-media">
                 <img
                   src="{{ 'skin1004-centella-ampoule.png' | asset_url }}"
@@ -99,9 +114,9 @@
                 <strong>SKIN1004</strong>
                 <span>Centella Ampoule</span>
               </div>
-            </article>
+            </a>
 
-            <article class="rolang-showcase-card">
+            <a class="rolang-showcase-card rolang-showcase-card-link" href="{{ showcase_fallback_url }}" aria-label="Browse the launch collection">
               <div class="rolang-showcase-media">
                 <img
                   src="{{ 'cosrx-advanced-snail-96-mucin-essence.jpg' | asset_url }}"
@@ -115,9 +130,9 @@
                 <strong>COSRX</strong>
                 <span>Snail 96 Mucin Essence</span>
               </div>
-            </article>
+            </a>
 
-            <article class="rolang-showcase-card">
+            <a class="rolang-showcase-card rolang-showcase-card-link" href="{{ showcase_fallback_url }}" aria-label="Browse the launch collection">
               <div class="rolang-showcase-media">
                 <img
                   src="{{ 'medicube-collagen-niacinamide-jelly-cream.jpg' | asset_url }}"
@@ -131,7 +146,7 @@
                 <strong>Medicube</strong>
                 <span>Collagen Niacinamide Jelly Cream</span>
               </div>
-            </article>
+            </a>
           {% endif %}
         </div>
 

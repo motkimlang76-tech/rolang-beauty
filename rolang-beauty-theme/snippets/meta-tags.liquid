@@ -4,10 +4,21 @@
 
 {%- liquid
   assign brand_name = settings.brand_name | default: shop.name
-  assign og_title = page_title | default: brand_name
+  assign brand_tagline = settings.brand_tagline | strip
+  assign meta_title = page_title | default: brand_name
+  assign og_title = meta_title
   assign og_url = canonical_url | default: request.origin
   assign og_type = 'website'
-  assign og_description = page_description | default: shop.description | default: brand_name
+  assign og_description = page_description | default: shop.description | default: brand_tagline | default: brand_name
+
+  if request.page_type == 'index'
+    assign meta_title = brand_name
+    assign og_title = brand_name
+
+    if brand_tagline != blank
+      assign og_description = brand_tagline
+    endif
+  endif
 
   if request.page_type == 'product'
     assign og_type = 'product'
@@ -94,10 +105,10 @@
 {%- endif -%}
 
 <title>
-  {{ page_title }}
+  {{ meta_title }}
   {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
   {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-  {%- unless page_title contains brand_name %} &ndash; {{ brand_name }}{% endunless -%}
+  {%- unless meta_title contains brand_name %} &ndash; {{ brand_name }}{% endunless -%}
 </title>
 
 <link

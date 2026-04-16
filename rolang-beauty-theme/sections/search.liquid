@@ -1,3 +1,5 @@
+{% assign suggested_searches = 'cleanser|serum|toner|sunscreen' | split: '|' %}
+
 <div class="rolang-search-shell">
   <div class="rolang-page-hero">
     <p class="rolang-eyebrow">Search</p>
@@ -7,22 +9,58 @@
 
   <form class="rolang-search-form" action="{{ routes.search_url }}" method="get" role="search">
     <input
+      id="SearchInput-{{ section.id }}"
       class="rolang-search-input"
       type="search"
       size="50"
       name="q"
       value="{{ search.terms | escape }}"
+      aria-label="Search products, pages, and store content"
       placeholder="{{ 'search.placeholder' | t }}"
     >
     <button class="rolang-button" type="submit">{{ 'search.submit' | t }}</button>
   </form>
+
+  {% unless search.performed %}
+    <div class="rolang-search-grid">
+      <article class="rolang-soft-card rolang-search-card">
+        <span class="rolang-product-meta">Quick start</span>
+        <strong>Start with a routine keyword</strong>
+        <p>Begin with a product type, then narrow down from the results page.</p>
+        <div class="rolang-cart-actions">
+          {% for term in suggested_searches %}
+            <a class="rolang-button-secondary" href="{{ routes.search_url }}?q={{ term | url_encode }}">{{ term | capitalize }}</a>
+          {% endfor %}
+        </div>
+      </article>
+
+      <article class="rolang-soft-card rolang-search-card">
+        <span class="rolang-product-meta">Browse instead</span>
+        <strong>Use the catalog when you are exploring</strong>
+        <p>If you are not looking for a specific term yet, jump to the full product grid or the collections index.</p>
+        <div class="rolang-cart-actions">
+          <a class="rolang-button-secondary" href="{{ routes.all_products_collection_url }}">All products</a>
+          <a class="rolang-button-secondary" href="{{ routes.collections_url }}">Collections</a>
+        </div>
+      </article>
+    </div>
+  {% endunless %}
 
   {% if search.performed %}
     {% if search.results_count == 0 %}
       <div class="rolang-empty-state">
         <p class="rolang-eyebrow">No results</p>
         <h2>No matches for “{{ search.terms | escape }}”.</h2>
-        <p>Try a product name, brand, or collection keyword.</p>
+        <p>Try a product name, brand, or collection keyword, or switch to browsing while you refine the search.</p>
+        <div class="rolang-cart-actions">
+          {% for term in suggested_searches %}
+            <a class="rolang-button-secondary" href="{{ routes.search_url }}?q={{ term | url_encode }}">{{ term | capitalize }}</a>
+          {% endfor %}
+        </div>
+        <div class="rolang-cart-actions">
+          <a class="rolang-button-secondary" href="{{ routes.all_products_collection_url }}">Browse all products</a>
+          <a class="rolang-button-secondary" href="{{ routes.collections_url }}">Browse collections</a>
+        </div>
       </div>
     {% else %}
       <p class="rolang-search-summary">
@@ -51,15 +89,27 @@
                 </div>
               </article>
             {% else %}
+              {% assign result_type_label = result.object_type | replace: '_', ' ' | capitalize %}
+              {% assign result_cta_label = 'Open result' %}
+
+              {% case result.object_type %}
+                {% when 'article' %}
+                  {% assign result_type_label = 'Editorial article' %}
+                  {% assign result_cta_label = 'Read article' %}
+                {% when 'page' %}
+                  {% assign result_type_label = 'Store page' %}
+                  {% assign result_cta_label = 'Open page' %}
+              {% endcase %}
+
               <article class="rolang-soft-card rolang-search-card">
-                <span class="rolang-product-meta">{{ result.object_type | replace: '_', ' ' }}</span>
+                <span class="rolang-product-meta">{{ result_type_label }}</span>
                 <strong>{{ result.title }}</strong>
                 {% if result.content != blank %}
                   <p>{{ result.content | strip_html | truncatewords: 28 }}</p>
                 {% else %}
                   <p>Open this result to continue browsing the store.</p>
                 {% endif %}
-                <a class="rolang-inline-link" href="{{ result.url }}">Open result</a>
+                <a class="rolang-inline-link" href="{{ result.url }}">{{ result_cta_label }}</a>
               </article>
             {% endif %}
           {% endfor %}

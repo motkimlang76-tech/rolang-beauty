@@ -23,6 +23,11 @@
   --container: min(1180px, calc(100vw - 2rem));
   --font-body: "Mulish", "Helvetica Neue", sans-serif;
   --font-display: "Playfair Display", Georgia, serif;
+  --hero-photo-art:
+    radial-gradient(circle at 78% 18%, rgba(255, 255, 255, 0.74) 0%, rgba(255, 255, 255, 0.26) 12%, rgba(255, 255, 255, 0) 28%),
+    radial-gradient(circle at 70% 36%, rgba(255, 186, 223, 0.44) 0%, rgba(255, 186, 223, 0.24) 18%, rgba(255, 186, 223, 0) 42%),
+    radial-gradient(circle at 88% 72%, rgba(134, 194, 255, 0.26) 0%, rgba(134, 194, 255, 0.12) 16%, rgba(134, 194, 255, 0) 40%),
+    linear-gradient(135deg, rgba(255, 230, 241, 0.9) 0%, rgba(255, 245, 250, 0.84) 40%, rgba(244, 240, 255, 0.84) 100%);
 }
 
 *,
@@ -292,7 +297,7 @@ code {
   background:
     linear-gradient(90deg, rgba(255, 249, 252, 0.99) 0%, rgba(255, 246, 250, 0.98) 22%, rgba(255, 232, 244, 0.92) 42%, rgba(248, 233, 245, 0.72) 60%, rgba(240, 239, 255, 0.28) 100%),
     linear-gradient(180deg, rgba(255, 235, 245, 0.1), rgba(255, 255, 255, 0.18)),
-    url("../assets/hero/skin-photo.jpg") center right / cover no-repeat,
+    var(--hero-photo-art),
     linear-gradient(180deg, rgba(255, 242, 248, 0.98), rgba(247, 239, 255, 0.98));
   opacity: 0.98;
 }
@@ -1982,7 +1987,7 @@ p {
     background:
       linear-gradient(180deg, rgba(255, 248, 252, 0.98) 0%, rgba(255, 242, 248, 0.95) 28%, rgba(252, 232, 243, 0.84) 52%, rgba(240, 239, 255, 0.38) 100%),
       linear-gradient(180deg, rgba(255, 236, 246, 0.08), rgba(255, 255, 255, 0.16)),
-      url("../assets/hero/skin-photo.jpg") center top / cover no-repeat,
+      var(--hero-photo-art),
       linear-gradient(180deg, rgba(255, 242, 248, 0.98), rgba(247, 239, 255, 0.98));
     opacity: 0.96;
   }
@@ -2072,7 +2077,7 @@ p {
     background:
       linear-gradient(180deg, rgba(255, 248, 252, 0.99) 0%, rgba(255, 242, 248, 0.97) 34%, rgba(252, 233, 244, 0.88) 52%, rgba(243, 241, 255, 0.5) 100%),
       linear-gradient(180deg, rgba(255, 236, 246, 0.08), rgba(255, 255, 255, 0.16)),
-      url("../assets/hero/skin-photo.jpg") center top / cover no-repeat,
+      var(--hero-photo-art),
       linear-gradient(180deg, rgba(255, 242, 248, 0.98), rgba(247, 239, 255, 0.98));
     opacity: 0.96;
   }

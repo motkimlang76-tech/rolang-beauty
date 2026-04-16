@@ -8,7 +8,8 @@ Shopify storefront and product catalog source for Rolang Beauty.
 
 ## Structure
 
-- `rolang-beauty-theme/` Shopify theme source
+- `rolang-beauty-theme/` primary Shopify theme source
+- `index.html`, `404.html`, and `src/` legacy static catalog source used by GitHub Pages
 - `scripts/` Shopify sync and export utilities
 - `shopify-import/` generated CSV imports and launch reports
 - `src/data/site-data.js` catalog content, pricing, and product metadata
@@ -39,6 +40,7 @@ shopify theme dev --store rolangbeauty.myshopify.com
 - `src/data/site-data.js` controls catalog copy, brands, and product details
 - `scripts/export-shopify-products.mjs` generates the Shopify CSV import
 - `scripts/sync-shopify-launch.mjs` syncs the launch assortment into Shopify
+- `scripts/sync-shopify-draft-catalog.mjs` loads the remaining catalog into Shopify as draft products
 
 ## Deploy
 

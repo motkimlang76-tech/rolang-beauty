@@ -105,7 +105,7 @@ const rows = siteData.projects.map((product) => {
     'true',
     '',
     '0',
-    'deny',
+    'false',
     '0',
     'g',
     'true',

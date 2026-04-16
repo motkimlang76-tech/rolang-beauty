@@ -28,19 +28,61 @@
     </p>
   </div>
 
-  <div class="rolang-footer-links">
+  <nav class="rolang-footer-links" aria-label="Footer navigation">
     {% if section.settings.menu != blank and section.settings.menu.links.size > 0 %}
       {% for link in section.settings.menu.links %}
-        <a href="{{ link.url }}">{{ link.title }}</a>
+        <a
+          href="{{ link.url }}"
+          {% if link.current or link.active %}
+            aria-current="page"
+          {% endif %}
+        >
+          {{ link.title }}
+        </a>
       {% endfor %}
     {% else %}
-      <a href="{{ routes.root_url }}">Home</a>
-      <a href="{{ routes.all_products_collection_url }}">Products</a>
-      <a href="{{ routes.collections_url }}">Collections</a>
-      <a href="{{ routes.search_url }}">Search</a>
-      <a href="{{ routes.cart_url }}">Cart</a>
+      <a
+        href="{{ routes.root_url }}"
+        {% if request.page_type == 'index' %}
+          aria-current="page"
+        {% endif %}
+      >
+        Home
+      </a>
+      <a
+        href="{{ routes.all_products_collection_url }}"
+        {% if request.page_type == 'collection' or request.page_type == 'product' %}
+          aria-current="page"
+        {% endif %}
+      >
+        Products
+      </a>
+      <a
+        href="{{ routes.collections_url }}"
+        {% if request.page_type == 'list-collections' %}
+          aria-current="page"
+        {% endif %}
+      >
+        Collections
+      </a>
+      <a
+        href="{{ routes.search_url }}"
+        {% if request.page_type == 'search' %}
+          aria-current="page"
+        {% endif %}
+      >
+        Search
+      </a>
+      <a
+        href="{{ routes.cart_url }}"
+        {% if request.page_type == 'cart' %}
+          aria-current="page"
+        {% endif %}
+      >
+        Cart
+      </a>
     {% endif %}
-  </div>
+  </nav>
 
   <div class="rolang-footer-policies">
     <strong class="rolang-footer-heading">Policies</strong>
@@ -58,7 +100,7 @@
         <a href="{{ terms_policy.url }}">Terms of service</a>
       {% endif %}
     {% else %}
-      <p>Add Shopify policies in admin and they will appear here automatically.</p>
+      <p>Store policies will appear here once they are published in Shopify.</p>
     {% endif %}
   </div>
 
@@ -98,13 +140,13 @@
       "type": "textarea",
       "id": "footer_copy",
       "label": "Footer copy",
-      "default": "K-beauty collections, product pages, cart, and checkout now run on Shopify instead of a static catalog."
+      "default": "Browse skincare products and collections with product details, cart, and checkout in one place."
     },
     {
       "type": "textarea",
       "id": "footer_note",
       "label": "Footer note",
-      "default": "Update the footer links, payment icons, and store policies inside Shopify admin before going live."
+      "default": "Questions about products, orders, shipping, or returns? Use the support details and policy links below."
     },
     {
       "type": "link_list",
