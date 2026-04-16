@@ -207,26 +207,28 @@ async function includeInOnlineStore(page) {
     return { changed: false, reason: 'already_in_sales_channels' };
   }
 
-  const managePublishing = page.getByRole('button', { name: /Manage publishing/i });
+  let managePublishing = page.getByRole('button', { name: /Manage publishing/i }).first();
+  if ((await managePublishing.count()) === 0) {
+    managePublishing = page.locator('s-internal-button[accessibilitylabel="Manage publishing"]').first();
+  }
+
   if ((await managePublishing.count()) === 0) {
     return { changed: false, reason: 'manage_publishing_not_found' };
   }
 
-  await managePublishing.click();
+  await managePublishing.click({ force: true });
+  await wait(1200);
 
-  const dialog = page.getByRole('dialog', { name: /Manage publishing/i });
-  await dialog.waitFor({ state: 'visible', timeout: 15000 });
-
-  const searchInput = dialog
+  const searchInput = page
     .locator('input[placeholder="Search channels"], s-internal-search-field input')
-    .first();
+    .last();
   if ((await searchInput.count()) > 0) {
     await searchInput.click({ force: true });
     await searchInput.fill('Online Store');
     await wait(1200);
   }
 
-  const onlineStoreText = dialog.getByText(/Online Store/i).last();
+  const onlineStoreText = page.getByText(/^Online Store$/).last();
   if ((await onlineStoreText.count()) > 0) {
     const onlineStoreCheckbox = onlineStoreText
       .locator('xpath=ancestor::*[.//input[@type="checkbox"]][1]')
@@ -241,17 +243,17 @@ async function includeInOnlineStore(page) {
       await onlineStoreText.click({ force: true });
     }
   } else {
-    let checkboxes = dialog.locator('input[type="checkbox"]');
+    let checkboxes = page.locator('input[type="checkbox"]');
     let checkboxCount = await checkboxes.count();
 
     if (checkboxCount === 0) {
       await wait(2000);
-      checkboxes = dialog.locator('input[type="checkbox"]');
+      checkboxes = page.locator('input[type="checkbox"]');
       checkboxCount = await checkboxes.count();
     }
 
     if (checkboxCount > 0) {
-      const onlineStoreCheckbox = checkboxes.first();
+      const onlineStoreCheckbox = checkboxes.last();
       if (!(await onlineStoreCheckbox.isChecked())) {
         await onlineStoreCheckbox.check({ force: true });
       }
@@ -260,7 +262,7 @@ async function includeInOnlineStore(page) {
     }
   }
 
-  await dialog.getByRole('button', { name: /^Done$/ }).click();
+  await page.getByRole('button', { name: /^Done$/ }).last().click({ force: true });
   await savePage(page);
 
   const afterText = await page.locator('body').innerText();
