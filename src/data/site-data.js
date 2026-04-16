@@ -10,7 +10,7 @@ export const siteData = {
     location: "Phnom Penh City, Cambodia",
     brandImage: "src/assets/rolang-brand-photo-badge.jpeg",
     brandImageAlt: "ROLANG BEAUTY brand photo",
-    availability: "Online orders open now • 48-product SKIN1004, COSRX, Isntree, ANUA, Medicube, and APLB guide",
+    availability: "Online orders open now • 49-product SKIN1004, COSRX, Isntree, ANUA, Medicube, and APLB guide",
     intro: "A softer way to shop Korean skincare online.",
     summary:
       "ROLANG BEAUTY is an online Korean beauty shop based in Phnom Penh City, Cambodia. The current homepage now leads with a clean product guide for SKIN1004, COSRX, Isntree, ANUA, Medicube, and APLB so customers can understand each item faster by ingredient, skin concern, and skin type.",
@@ -25,7 +25,7 @@ export const siteData = {
     },
   },
   home: {
-    notes: ["48 products added", "Dry / Oily / Sensitive filter", "SKIN1004 + COSRX + Isntree + ANUA + Medicube + APLB"],
+    notes: ["49 products added", "Dry / Oily / Sensitive filter", "SKIN1004 + COSRX + Isntree + ANUA + Medicube + APLB"],
     spotlightTitle: "Three steps for a clean, calm everyday routine.",
     spotlightDescription:
       "Start with soothing care, layer in hydration, and finish with lightweight daily protection. The homepage highlights an easy first order instead of overwhelming the customer.",
@@ -101,7 +101,7 @@ export const siteData = {
     ],
   },
   stats: [
-    { value: "48 products", label: "now shown in the product guide section" },
+    { value: "49 products", label: "now shown in the product guide section" },
     { value: "6 brands", label: "SKIN1004, COSRX, Isntree, ANUA, Medicube, and APLB featured in the current edit" },
     { value: "Skin-type filter", label: "customers can narrow the guide by dry, oily, or sensitive" },
   ],
@@ -113,7 +113,7 @@ export const siteData = {
     image: "src/assets/products/medicube/collagen-niacinamide-jelly-cream.jpg",
     imageAlt: "Medicube Collagen Niacinamide Jelly Cream jar",
     highlights: [
-      "48 products across 6 Korean skincare brands",
+      "49 products across 6 Korean skincare brands",
       "Filter by dry, oily, or sensitive skin",
       "Strong base for adding prices later",
     ],
@@ -627,6 +627,38 @@ export const siteData = {
       ],
       stack: ["Isntree", "Barrier care", "Gentle cleanse"],
       href: "mailto:motkimlang76@gmail.com?subject=Ask%20about%20Isntree%20Yam%20Root%20Vegan%20Milk%20Cleanser",
+      ctaLabel: "Ask about this product",
+      cartEnabled: false,
+    },
+    {
+      id: "anua-heartleaf-pore-control-cleansing-oil",
+      brand: "ANUA",
+      productName: "Heartleaf Pore Control Cleansing Oil",
+      skinTypes: ["dry", "oily", "sensitive"],
+      title: "ANUA Heartleaf Pore Control Cleansing Oil",
+      category: "Pore cleansing oil",
+      meta: "MYR 89",
+      image: "src/assets/products/anua/heartleaf-pore-control-cleansing-oil.png",
+      imageAlt: "ANUA Heartleaf Pore Control Cleansing Oil bottle",
+      imageBadge: "Pore cleanse",
+      cardTag: "Oil Cleanser",
+      description:
+        "A lightweight first cleanse that melts away makeup, sunscreen, and daily buildup while helping pores feel clearer and skin stay soft, calm, and balanced.",
+      details: [
+        { label: "Size", value: "200 ml / 6.76 fl oz" },
+        { label: "Key Ingredients", value: "Heartleaf Extract, Jojoba Oil, and Grape Seed Oil" },
+        {
+          label: "What It Helps With",
+          value: "Dissolves makeup, excess sebum, and blackhead-prone buildup without stripping the skin's natural moisture.",
+        },
+        { label: "Best Skin Type", value: "All / Oily / Acne-prone / Sensitive" },
+        {
+          label: "How To Use",
+          value: "Massage 2-3 pumps onto dry skin, add water to emulsify into a milky texture, then rinse well with lukewarm water.",
+        },
+      ],
+      stack: ["ANUA", "First cleanse", "Pore care"],
+      href: "mailto:motkimlang76@gmail.com?subject=Ask%20about%20ANUA%20Heartleaf%20Pore%20Control%20Cleansing%20Oil",
       ctaLabel: "Ask about this product",
       cartEnabled: false,
     },
